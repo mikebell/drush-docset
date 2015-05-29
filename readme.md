@@ -6,3 +6,7 @@ Install:
     mkdir drush.docset/Contents/Resources/Documents -p
     php console.php generate
     php console.php build
+
+Dependencies:
+
+* PHP sqlite3
