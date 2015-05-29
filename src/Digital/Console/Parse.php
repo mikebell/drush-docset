@@ -55,7 +55,7 @@ class Parse {
 
     $content['title'] = $name;
     $content['aliases'] = $data->aliases;
-    $content['arguments'] = $data->arguements;
+    $content['arguments'] = $data->arguments;
     $content['options'] = $data->options;
     $content['examples'] = $data->examples;
 
