@@ -1,0 +1,4 @@
+---
+modules:
+  - views
+  - coder
