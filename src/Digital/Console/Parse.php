@@ -63,8 +63,16 @@ class Parse
                 $key++;
             }
         }
-//        $content['options'] = $data->options;
-        $content['examples'] = $data->examples;
+
+        $key = 0;
+        foreach ($data->examples as $option => $text) {
+            // @TODO there are object that need dealing with here.
+            if (!is_object($text) && $text != null) {
+                $content['examples'][$key]['example'] = $option;
+                $content['examples'][$key]['exampletext'] = $text;
+                $key++;
+            }
+        }
 
         $content = $template->render($content);
         return $content;
