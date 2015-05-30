@@ -12,7 +12,7 @@ class Build extends Command
     {
         $this
             ->setName('build')
-            ->setDescription('Build html from commands.json')
+            ->setDescription('Builds html from commands.json')
         ;
     }
 

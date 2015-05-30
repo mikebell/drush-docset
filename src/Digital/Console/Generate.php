@@ -12,7 +12,7 @@ class Generate extends Command
     {
         $this
             ->setName('generate')
-            ->setDescription('Generate data for all modules')
+            ->setDescription('Generates commands.json from local drush installation')
         ;
     }
 
