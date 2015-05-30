@@ -23,9 +23,12 @@ class Generate extends Command
         $yaml = new Parser();
 
         $modules = $yaml->parse(file_get_contents('modules.yml'));
-        foreach ($modules['modules'] as $module) {
-            exec('vendor/bin/drush dl ' . $module . ' --destination=' . $_SERVER['HOME']. '/.drush -y');
+        if ($modules['modules'] != null) {
+            foreach ($modules['modules'] as $module) {
+                exec('vendor/bin/drush dl ' . $module . ' --destination=' . $_SERVER['HOME']. '/.drush -y');
+            }
         }
+
         exec('vendor/bin/drush help --format=json > output/commands.json');
 
         $output->writeln($text);
