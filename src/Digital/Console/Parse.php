@@ -41,6 +41,7 @@ class Parse
         $template = $twig->loadTemplate('index.htm.twig');
 
         $content['title'] = $name;
+        $content['description'] = $data->description;
         $content['aliases'] = $data->aliases;
 
         // Parse arguments so they make sense to twig.
