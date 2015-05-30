@@ -13,8 +13,8 @@ use Twig_Loader_Filesystem;
 use Twig_Environment;
 
 class Parse {
-  public function ParseHtml($name, $data) {
-    // Take php object/array and parse it to html then return.
+    public function ParseHtml($name, $data) {
+        // Take php object/array and parse it to html then return.
 
 //
 //    $content .= '<ul>';
@@ -46,20 +46,23 @@ class Parse {
 //
 //    $content .= '</body>';
 //    $content .= '</html>';
-    $content = array();
-    Twig_Autoloader::register();
+        $content = array();
+        Twig_Autoloader::register();
 
-    $loader = new Twig_Loader_Filesystem('src/Digital/Console/Views');
-    $twig = new Twig_Environment($loader, array());
-    $template = $twig->loadTemplate('index.htm.twig');
+        $loader = new Twig_Loader_Filesystem('src/Digital/Console/Views');
+        $twig = new Twig_Environment($loader, array());
+        $template = $twig->loadTemplate('index.htm.twig');
 
-    $content['title'] = $name;
-    $content['aliases'] = $data->aliases;
-    $content['arguments'] = $data->arguments;
-    $content['options'] = $data->options;
-    $content['examples'] = $data->examples;
+        $content['title'] = $name;
+        $content['aliases'] = $data->aliases;
 
-    $content = $template->render($content);
-    return $content;
-  }
+
+        $content['arguments'] = $data->arguments;
+        var_dump($data->arguments);
+        $content['options'] = $data->options;
+        $content['examples'] = $data->examples;
+
+        $content = $template->render($content);
+        return $content;
+    }
 }

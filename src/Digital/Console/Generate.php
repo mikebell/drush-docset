@@ -12,26 +12,26 @@ use Digital\Console\Parse;
 
 class Generate extends Command
 {
-  protected function configure()
-  {
-    $this
-      ->setName('generate')
-      ->setDescription('Generate data for all modules')
-    ;
-  }
-
-  protected function execute(InputInterface $input, OutputInterface $output)
-  {
-    $text = 'Generating help documentation';
-
-    $yaml = new Parser();
-
-    $modules = $yaml->parse(file_get_contents('modules.yml'));
-    foreach ($modules['modules'] as $module) {
-//      exec('vendor/bin/drush dl ' . $module . ' --destination=' . $_SERVER['HOME']. '/.drush -y');
+    protected function configure()
+    {
+        $this
+            ->setName('generate')
+            ->setDescription('Generate data for all modules')
+        ;
     }
-    exec('vendor/bin/drush help --format=json > output/commands.json');
 
-    $output->writeln($text);
-  }
+    protected function execute(InputInterface $input, OutputInterface $output)
+    {
+        $text = 'Generating help documentation';
+
+        $yaml = new Parser();
+
+        $modules = $yaml->parse(file_get_contents('modules.yml'));
+        foreach ($modules['modules'] as $module) {
+//      exec('vendor/bin/drush dl ' . $module . ' --destination=' . $_SERVER['HOME']. '/.drush -y');
+        }
+        exec('vendor/bin/drush help --format=json > output/commands.json');
+
+        $output->writeln($text);
+    }
 }

@@ -27,18 +27,18 @@ class Build extends Command
         $db->query("CREATE TABLE searchIndex(id INTEGER PRIMARY KEY, name TEXT, type TEXT, path TEXT)");
         $db->query("CREATE UNIQUE INDEX anchor ON searchIndex (name, type, path)");
         foreach ($file as $key => $contents) {
-          foreach ($contents as $command) {
-            if (is_object($command)) {
-              foreach ($command as $name => $desc) {
-                $content = new Parse();
-                $content = $content->ParseHtml($name, $desc);
-                $file = fopen('drush.docset/Contents/Resources/Documents/' . $name . '.htm', 'w+');
-                fwrite($file, $content);
-                $filename = $name . '.htm';
-                $db->query("INSERT OR IGNORE INTO searchIndex(name, type, path) VALUES (\"$name\",\"Command\",\"$filename\")");
-              }
+            foreach ($contents as $command) {
+                if (is_object($command)) {
+                    foreach ($command as $name => $desc) {
+                        $content = new Parse();
+                        $content = $content->ParseHtml($name, $desc);
+                        $file = fopen('drush.docset/Contents/Resources/Documents/' . $name . '.htm', 'w+');
+                        fwrite($file, $content);
+                        $filename = $name . '.htm';
+                        $db->query("INSERT OR IGNORE INTO searchIndex(name, type, path) VALUES (\"$name\",\"Command\",\"$filename\")");
+                    }
+                }
             }
-          }
         }
 
         $output->writeln($text);
