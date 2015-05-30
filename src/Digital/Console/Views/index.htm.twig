@@ -10,25 +10,36 @@
             <h1>{{ title }}</h1>
             <p>{{ description }}</p>
             <code>drush {{ title }}</code>
-            <h2>Aliases:</h2>
-            <ul>
-                {% for alias in aliases %}
-                    <li>{{ alias }}</li>
+
+            {% if aliases %}
+                <h2>Aliases:</h2>
+                <ul>
+                    {% for alias in aliases %}
+                        <li>{{ alias }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+            {% if arguments %}
+                <h2>Arguments:</h2>
+                {% for argument in arguments %}
+                    <code>{{ argument['argument'] }} : {{ argument['argumenttext'] }}</code><br/>
                 {% endfor %}
-            </ul>
-            <h2>Arguments:</h2>
-            {% for argument in arguments %}
-                <code>{{ argument['argument'] }} : {{ argument['argumenttext'] }}</code><br/>
-            {% endfor %}
-            <h2>Options:</h2>
-            {% for option in options %}
-                <code>--{{ option['option'] }} : {{ option['optiontext'] }}</code><br/>
-            {% endfor %}
-            <h2>Examples:</h2>
-            {% for example in examples %}
-                <p>{{ example['exampletext'] }}</p>
-                <code>{{ example['example'] }}</code><br/><br/>
-            {% endfor %}
+            {% endif %}
+
+            {% if options %}
+                <h2>Options:</h2>
+                {% for option in options %}
+                    <code>--{{ option['option'] }} : {{ option['optiontext'] }}</code><br/>
+                {% endfor %}
+            {% endif %}
+
+            {% if examples %}
+                <h2>Examples:</h2>
+                {% for example in examples %}
+                    <p>{{ example['exampletext'] }}</p>
+                    <code>{{ example['example'] }}</code><br/><br/>
+                {% endfor %}
+            {% endif %}
         </div>
     </body>
 </html>
