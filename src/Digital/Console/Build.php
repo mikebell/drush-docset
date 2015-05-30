@@ -2,9 +2,7 @@
 namespace Digital\Console;
 
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use sqlite3;
 
@@ -31,7 +29,7 @@ class Build extends Command
                 if (is_object($command)) {
                     foreach ($command as $name => $desc) {
                         $content = new Parse();
-                        $content = $content->ParseHtml($name, $desc);
+                        $content = $content->parseHtml($name, $desc);
                         $file = fopen('drush.docset/Contents/Resources/Documents/' . $name . '.htm', 'w+');
                         fwrite($file, $content);
                         $filename = $name . '.htm';

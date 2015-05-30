@@ -12,8 +12,10 @@ use Twig_Autoloader;
 use Twig_Loader_Filesystem;
 use Twig_Environment;
 
-class Parse {
-    public function ParseHtml($name, $data) {
+class Parse
+{
+    public function parseHtml($name, $data)
+    {
         // Take php object/array and parse it to html then return.
 
 //
@@ -56,9 +58,7 @@ class Parse {
         $content['title'] = $name;
         $content['aliases'] = $data->aliases;
 
-
         $content['arguments'] = $data->arguments;
-        var_dump($data->arguments);
         $content['options'] = $data->options;
         $content['examples'] = $data->examples;
 
