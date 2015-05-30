@@ -21,7 +21,6 @@ class Build extends Command
         $text = 'Built html documentation';
         $file = json_decode(file_get_contents('output/commands.json'));
         exec("rm drush.docset/Contents/Resources/docSet.dsidx");
-        exec("rm drush.docset/Contents/Resources/Documents/*.htm");
         $db = new sqlite3("drush.docset/Contents/Resources/docSet.dsidx");
         $db->query("CREATE TABLE searchIndex(id INTEGER PRIMARY KEY, name TEXT, type TEXT, path TEXT)");
         $db->query("CREATE UNIQUE INDEX anchor ON searchIndex (name, type, path)");
