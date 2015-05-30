@@ -18,9 +18,9 @@
             <code>{{ argument['argument'] }} : {{ argument['argumenttext'] }}</code>
         {% endfor %}
         <h2>Options:</h2>
-        {#{% for option in options %}#}
-            {#<code>--{{ option['option'] }} : {{ option['option'] }}</code>#}
-        {#{% endfor %}#}
+        {% for option in options %}
+            <code>--{{ option['option'] }} : {{ option['optiontext'] }}</code>
+        {% endfor %}
         <h2>Examples:</h2>
         <p>Write an archive containing 3 sites in it.</p>
         <code>drush drush archive-dump default,example.com,foo.com</code>
