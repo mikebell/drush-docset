@@ -17,22 +17,6 @@ class Parse
     public function parseHtml($name, $data)
     {
         // Take php object/array and parse it to html then return.
-//    $content .= '<h2>Options:</h2>';
-//    foreach ($data->options as $option => $text) {
-//      if (!is_object($text)) {
-//        $content .= '<code>--' . $option . ' : ' . $text . '</code>';
-//      }
-//    }
-//    $content .= '<h2>Examples:</h2>';
-//    foreach ($data->examples as $option => $text) {
-//      if (!is_object($text)) {
-//        $content .= '<p>' . $text . '</p>';
-//        $content .= '<code>drush ' . $option . '</code>';
-//      }
-//    }
-//
-//    $content .= '</body>';
-//    $content .= '</html>';
         $content = array();
         Twig_Autoloader::register();
 
