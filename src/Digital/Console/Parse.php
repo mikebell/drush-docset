@@ -17,21 +17,6 @@ class Parse
     public function parseHtml($name, $data)
     {
         // Take php object/array and parse it to html then return.
-
-//
-//    $content .= '<ul>';
-//    foreach ($data->aliases as $alias) {
-//      $content .= '<li>' . $alias . '</li>';
-//    }
-//    $content .= '</ul>';
-//
-//    $content .= '<h2>Arguments:</h2>';
-//    foreach ($data->arguments as $option => $text) {
-//      // @TODO there are object that need dealing with here.
-//      if (!is_object($text)) {
-//        $content .= '<code>' . $option . ' : ' . $text . '</code>';
-//      }
-//    }
 //    $content .= '<h2>Options:</h2>';
 //    foreach ($data->options as $option => $text) {
 //      if (!is_object($text)) {
@@ -58,7 +43,16 @@ class Parse
         $content['title'] = $name;
         $content['aliases'] = $data->aliases;
 
-        $content['arguments'] = $data->arguments;
+        // Parse arguments so they make sense to twig.
+        $key = 0;
+        foreach ($data->arguments as $option => $text) {
+            // @TODO there are object that need dealing with here.
+            if (!is_object($text) && $text != null) {
+                $content['arguments'][$key]['argument'] = $option;
+                $content['arguments'][$key]['argumenttext'] = $text;
+                $key++;
+            }
+        }
         $content['options'] = $data->options;
         $content['examples'] = $data->examples;
 

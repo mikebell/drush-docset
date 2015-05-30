@@ -15,11 +15,12 @@
             </ul>
         <h2>Arguments:</h2>
         {% for argument in arguments %}
-            <code>{{ argument }}</code>
+            <code>{{ argument['argument'] }} : {{ argument['argumenttext'] }}</code>
         {% endfor %}
         <h2>Options:</h2>
-        <code>--description : Describe the archive contents.</code>
-        <code>--generator : The generator name to store in the MANIFEST file. The default is "Drush archive-dump".</code>
+        {#{% for option in options %}#}
+            {#<code>--{{ option['option'] }} : {{ option['option'] }}</code>#}
+        {#{% endfor %}#}
         <h2>Examples:</h2>
         <p>Write an archive containing 3 sites in it.</p>
         <code>drush drush archive-dump default,example.com,foo.com</code>
