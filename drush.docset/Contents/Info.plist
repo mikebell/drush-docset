@@ -12,5 +12,7 @@
 	<true/>
 	<key>isJavaScriptEnabled</key>
 	<true/>
+	<key>dashIndexFilePath</key>
+	<string>index.htm</string>
 </dict>
 </plist>

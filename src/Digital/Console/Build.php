@@ -5,6 +5,9 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use sqlite3;
+use Twig_Autoloader;
+use Twig_Loader_Filesystem;
+use Twig_Environment;
 
 class Build extends Command
 {
@@ -41,6 +44,17 @@ class Build extends Command
         }
         print 'Built html documentation' . PHP_EOL;
         exec("tar --exclude='.DS_Store' -cvzf Drush.tgz drush.docset");
+
+        Twig_Autoloader::register();
+        $content = array();
+
+        $loader = new Twig_Loader_Filesystem('src/Digital/Console/Views');
+        $twig = new Twig_Environment($loader, array());
+        $template = $twig->loadTemplate('index.twig');
+        $content = $template->render($content);
+        $file = fopen('drush.docset/Contents/Resources/Documents/index.htm', 'w+');
+        fwrite($file, $content);
+
         print 'Built Drush.tgz' . PHP_EOL;
 
         $text = 'Complete';
