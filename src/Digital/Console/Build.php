@@ -38,6 +38,8 @@ class Build extends Command
                 }
             }
         }
+        exec("tar --exclude='.DS_Store' -cvzf Drush.tgz drush.docset");
+        print 'Built Drush.tgz' . PHP_EOL;
 
         $output->writeln($text);
     }
