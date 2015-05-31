@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "caf720ef9eb5b32e70d91132628210ae",
+    "hash": "bfe54868ec6044ab7b49cd8177c86bae",
     "packages": [
         {
             "name": "d11wtq/boris",
@@ -42,16 +42,16 @@
         },
         {
             "name": "drush/drush",
-            "version": "7.0.0",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/drush-ops/drush.git",
-                "reference": "02a9841b29daba7b55295903c1c4b0a45c9abdc5"
+                "reference": "b4c0683922ab08ef81c9f7553f58ab845ea6972e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/drush-ops/drush/zipball/02a9841b29daba7b55295903c1c4b0a45c9abdc5",
-                "reference": "02a9841b29daba7b55295903c1c4b0a45c9abdc5",
+                "url": "https://api.github.com/repos/drush-ops/drush/zipball/b4c0683922ab08ef81c9f7553f58ab845ea6972e",
+                "reference": "b4c0683922ab08ef81c9f7553f58ab845ea6972e",
                 "shasum": ""
             },
             "require": {
@@ -74,7 +74,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "7.0.x-dev"
+                    "dev-master": "8.0.x-dev"
                 }
             },
             "autoload": {
@@ -122,7 +122,7 @@
             ],
             "description": "Drush is a command line shell and scripting interface for Drupal, a veritable Swiss Army knife designed to make life easier for those of us who spend some of our working hours hacking away at the command prompt.",
             "homepage": "http://www.drush.org",
-            "time": "2015-05-20 14:23:37"
+            "time": "2015-05-28 13:51:24"
         },
         {
             "name": "pear/console_table",
@@ -408,7 +408,9 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "drush/drush": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
