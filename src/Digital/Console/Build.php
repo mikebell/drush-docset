@@ -43,7 +43,7 @@ class Build extends Command
         exec("tar --exclude='.DS_Store' -cvzf Drush.tgz drush.docset");
         print 'Built Drush.tgz' . PHP_EOL;
 
-        $text = 'Complete'
+        $text = 'Complete';
         $output->writeln($text);
     }
 }
