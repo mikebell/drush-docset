@@ -22,7 +22,7 @@ class Parse
 
         $loader = new Twig_Loader_Filesystem('src/Digital/Console/Views');
         $twig = new Twig_Environment($loader, array());
-        $template = $twig->loadTemplate('index.htm.twig');
+        $template = $twig->loadTemplate('command.twig');
 
         $content['title'] = $name;
         $content['description'] = $data->description;
