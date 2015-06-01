@@ -29,6 +29,7 @@ class Generate extends Command
             }
         }
 
+        exec('vendor/bin/drush cc drush');
         exec('vendor/bin/drush help --format=json > output/commands.json');
 
         $output->writeln($text);
