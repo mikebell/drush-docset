@@ -1,3 +1,8 @@
 ---
 modules:
-
+  - features
+  - coder
+  - search_api
+  - module_builder
+  - migrate
+  - registry_rebuild
