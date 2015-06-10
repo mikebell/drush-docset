@@ -45,15 +45,20 @@ class Build extends Command
         print 'Built html documentation' . PHP_EOL;
         exec("tar --exclude='.DS_Store' -cvzf Drush.tgz drush.docset");
 
+        print 'Deleting old index.htm' . PHP_EOL;
+        exec("rm drush.docset/Contents/Resources/Documents/index.htm");
+
         Twig_Autoloader::register();
         $content = array();
+        $gentime = new \DateTime("now");
+        $content['gentime'] = $gentime->format('l, d-M-y H:i:s T');
 
         $loader = new Twig_Loader_Filesystem('src/Digital/Console/Views');
         $twig = new Twig_Environment($loader, array());
         $template = $twig->loadTemplate('index.twig');
-        $content = $template->render($content);
+        $index = $template->render($content);
         $file = fopen('drush.docset/Contents/Resources/Documents/index.htm', 'w+');
-        fwrite($file, $content);
+        fwrite($file, $index);
 
         print 'Built Drush.tgz' . PHP_EOL;
 
