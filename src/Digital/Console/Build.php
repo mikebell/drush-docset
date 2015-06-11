@@ -23,11 +23,11 @@ class Build extends Command
     {
         $file = json_decode(file_get_contents('output/commands.json'));
         exec("rm drush.docset/Contents/Resources/docSet.dsidx");
-        print 'Removed database' . PHP_EOL;
+        $output->writeln('Removed database');
         $db = new sqlite3("drush.docset/Contents/Resources/docSet.dsidx");
         $db->query("CREATE TABLE searchIndex(id INTEGER PRIMARY KEY, name TEXT, type TEXT, path TEXT)");
         $db->query("CREATE UNIQUE INDEX anchor ON searchIndex (name, type, path)");
-        print 'Created database' . PHP_EOL;
+        $output->writeln('Created database');
         foreach ($file as $key => $contents) {
             foreach ($contents as $command) {
                 if (is_object($command)) {
@@ -42,10 +42,10 @@ class Build extends Command
                 }
             }
         }
-        print 'Built html documentation' . PHP_EOL;
+        $output->writeln('Built html documentation');
         exec("tar --exclude='.DS_Store' -cvzf Drush.tgz drush.docset");
 
-        print 'Deleting old index.htm' . PHP_EOL;
+        $output->writeln('Deleting old index.htm');
         exec("rm drush.docset/Contents/Resources/Documents/index.htm");
 
         Twig_Autoloader::register();
@@ -60,9 +60,9 @@ class Build extends Command
         $file = fopen('drush.docset/Contents/Resources/Documents/index.htm', 'w+');
         fwrite($file, $index);
 
-        print 'Built Drush.tgz' . PHP_EOL;
+        $output->writeln('Built Drush.tgz');
 
-        $text = 'Complete';
+        $text = '<info>Complete</info>';
         $output->writeln($text);
     }
 }
