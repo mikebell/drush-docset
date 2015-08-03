@@ -64,8 +64,13 @@ class Build extends Command
         }
         exec("tar --exclude='.DS_Store' -cvzf Drush.tgz drush.docset");
 
+        $output->writeln('Deleting old index.htm');
+        exec("rm drush.docset/Contents/Resources/Documents/index.htm");
+
         Twig_Autoloader::register();
         $content = array();
+        $gentime = new \DateTime("now");
+        $content['gentime'] = $gentime->format('l, d-M-y H:i:s T');
 
         $loader = new Twig_Loader_Filesystem('src/Digital/Console/Views');
         $twig = new Twig_Environment($loader, array());

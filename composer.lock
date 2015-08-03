@@ -1,7 +1,7 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
     "hash": "bfe54868ec6044ab7b49cd8177c86bae",
@@ -46,24 +46,27 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/drush-ops/drush.git",
-                "reference": "b4c0683922ab08ef81c9f7553f58ab845ea6972e"
+                "reference": "af918debe394f1bd90cd7ac7690366e82a25b837"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/drush-ops/drush/zipball/b4c0683922ab08ef81c9f7553f58ab845ea6972e",
-                "reference": "b4c0683922ab08ef81c9f7553f58ab845ea6972e",
+                "url": "https://api.github.com/repos/drush-ops/drush/zipball/af918debe394f1bd90cd7ac7690366e82a25b837",
+                "reference": "af918debe394f1bd90cd7ac7690366e82a25b837",
                 "shasum": ""
             },
             "require": {
                 "d11wtq/boris": "~1.0",
                 "pear/console_table": "~1.2.0",
-                "php": ">=5.3.0",
+                "php": ">=5.4.5",
                 "symfony/var-dumper": "^2.6.3",
                 "symfony/yaml": "~2.2"
             },
             "require-dev": {
                 "phpunit/phpunit": ">=3.5",
                 "symfony/process": "2.4.5"
+            },
+            "suggest": {
+                "drush/config-extra": "Provides configuration workflow commands, such as config-merge."
             },
             "bin": [
                 "drush",
@@ -122,7 +125,7 @@
             ],
             "description": "Drush is a command line shell and scripting interface for Drupal, a veritable Swiss Army knife designed to make life easier for those of us who spend some of our working hours hacking away at the command prompt.",
             "homepage": "http://www.drush.org",
-            "time": "2015-05-28 13:51:24"
+            "time": "2015-06-05 20:36:51"
         },
         {
             "name": "pear/console_table",

@@ -6,3 +6,4 @@ modules:
   - module_builder
   - migrate
   - registry_rebuild
+  - devel
