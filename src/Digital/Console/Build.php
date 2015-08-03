@@ -8,6 +8,7 @@ use sqlite3;
 use Twig_Autoloader;
 use Twig_Loader_Filesystem;
 use Twig_Environment;
+use Symfony\Component\Console\Input\InputOption;
 
 class Build extends Command
 {
@@ -16,6 +17,12 @@ class Build extends Command
         $this
             ->setName('build')
             ->setDescription('Builds html from commands.json')
+            ->addOption(
+                'funky',
+                null,
+                InputOption::VALUE_NONE,
+                'OH YEAH FUNKAY TIME!'
+            )
         ;
     }
 
@@ -23,11 +30,19 @@ class Build extends Command
     {
         $file = json_decode(file_get_contents('output/commands.json'));
         exec("rm drush.docset/Contents/Resources/docSet.dsidx");
-        print 'Removed database' . PHP_EOL;
+        if ($input->getOption('funky')) {
+            $output->writeln('<error>Removed database</error>');
+        } else {
+            $output->writeln('Removed database');
+        }
         $db = new sqlite3("drush.docset/Contents/Resources/docSet.dsidx");
         $db->query("CREATE TABLE searchIndex(id INTEGER PRIMARY KEY, name TEXT, type TEXT, path TEXT)");
         $db->query("CREATE UNIQUE INDEX anchor ON searchIndex (name, type, path)");
-        print 'Created database' . PHP_EOL;
+        if ($input->getOption('funky')) {
+            $output->writeln('<info>Created database</info>');
+        } else {
+            $output->writeln('Created database');
+        }
         foreach ($file as $key => $contents) {
             foreach ($contents as $command) {
                 if (is_object($command)) {
@@ -42,7 +57,11 @@ class Build extends Command
                 }
             }
         }
-        print 'Built html documentation' . PHP_EOL;
+        if ($input->getOption('funky')) {
+            $output->writeln('<comment>Built html documentation</comment>');
+        } else {
+            $output->writeln('Built html documentation');
+        }
         exec("tar --exclude='.DS_Store' -cvzf Drush.tgz drush.docset");
 
         Twig_Autoloader::register();
@@ -56,8 +75,16 @@ class Build extends Command
         fwrite($file, $content);
 
         print 'Built Drush.tgz' . PHP_EOL;
+        if ($input->getOption('funky')) {
+            $output->writeln('<error>Built Drush.tgz</error>');
+        } else {
+            $output->writeln('Built Drush.tgz');
+        }
 
-        $text = 'Complete';
-        $output->writeln($text);
+        if ($input->getOption('funky')) {
+            $output->writeln('<info>Complete</info>');
+        } else {
+            $output->writeln('Complete');
+        }
     }
 }
