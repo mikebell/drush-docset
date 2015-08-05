@@ -79,7 +79,6 @@ class Build extends Command
         $file = fopen('drush.docset/Contents/Resources/Documents/index.htm', 'w+');
         fwrite($file, $content);
 
-        print 'Built Drush.tgz' . PHP_EOL;
         if ($input->getOption('funky')) {
             $output->writeln('<error>Built Drush.tgz</error>');
         } else {
