@@ -3,7 +3,8 @@
         "symfony/console": "^2.6",
         "drush/drush": "dev-master",
         "symfony/yaml": "^2.6",
-        "twig/twig": "^1.18"
+        "twig/twig": "^1.18",
+        "symfony/process": "^2.7"
     },
     "autoload": {
         "psr-4": {

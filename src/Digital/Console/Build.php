@@ -9,6 +9,7 @@ use Twig_Autoloader;
 use Twig_Loader_Filesystem;
 use Twig_Environment;
 use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Process\Process;
 
 class Build extends Command
 {
@@ -29,7 +30,17 @@ class Build extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $file = json_decode(file_get_contents('output/commands.json'));
-        exec("rm drush.docset/Contents/Resources/docSet.dsidx");
+
+        $process = new Process('rm drush.docset/Contents/Resources/docSet.dsidx');
+        $process->run();
+
+        // executes after the command finishes
+        if (!$process->isSuccessful()) {
+            throw new \RuntimeException($process->getErrorOutput());
+        }
+
+        $output->writeln($process->getOutput());
+
         if ($input->getOption('funky')) {
             $output->writeln('<error>Removed database</error>');
         } else {
@@ -62,7 +73,16 @@ class Build extends Command
         } else {
             $output->writeln('Built html documentation');
         }
-        exec("tar --exclude='.DS_Store' -cvzf Drush.tgz drush.docset");
+
+        $process = new Process("tar --exclude='.DS_Store' -cvzf Drush.tgz drush.docset");
+        $process->run();
+
+        // executes after the command finishes
+        if (!$process->isSuccessful()) {
+            throw new \RuntimeException($process->getErrorOutput());
+        }
+
+        $output->writeln($process->getOutput());
 
         if ($input->getOption('funky')) {
             $output->writeln('<info>Deleting old index.htm</info>');
@@ -70,7 +90,15 @@ class Build extends Command
             $output->writeln('Deleting old index.htm');
         }
 
-        exec("rm drush.docset/Contents/Resources/Documents/index.htm");
+        $process = new Process("rm drush.docset/Contents/Resources/Documents/index.htm");
+        $process->run();
+
+        // executes after the command finishes
+        if (!$process->isSuccessful()) {
+            throw new \RuntimeException($process->getErrorOutput());
+        }
+
+        $output->writeln($process->getOutput());
 
         Twig_Autoloader::register();
         $content = array();
@@ -93,7 +121,7 @@ class Build extends Command
         if ($input->getOption('funky')) {
             $output->writeln('<info>Complete</info>');
         } else {
-            $output->writeln('Complete');
+            $output->writeln('Completrm drush.docset/Contents/Resources/Documents/index.htm');
         }
     }
 }
