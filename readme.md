@@ -11,5 +11,3 @@ Dependencies:
 
 * PHP
 * sqlite3
-
-Travis v1.0.0
