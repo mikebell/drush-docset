@@ -1,7 +1,7 @@
 {
     "require": {
         "symfony/console": "^2.6",
-        "drush/drush": "dev-master",
+        "drush/drush": "^8.0.5",
         "symfony/yaml": "^2.6",
         "twig/twig": "^1.18",
         "symfony/process": "^2.7"
