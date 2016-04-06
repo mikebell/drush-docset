@@ -4,6 +4,6 @@ modules:
   - coder
   - search_api
   - module_builder
-  - migrate
-  - registry_rebuild
+  # - migrate
+  # - registry_rebuild
   - devel
