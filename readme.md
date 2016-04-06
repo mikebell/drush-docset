@@ -1,7 +1,5 @@
 Drush Docset Generator for Dash/Zeal
 
-[![Travis](https://travis-ci.org/mikebell/drush-docset.svg?branch=master)]()
-
 Install:
 
     composer install
