@@ -27,11 +27,11 @@ class Build extends Command
         if (file_exists("drush.docset/Contents/Resources/docSet.dsidx")) {
             $process = new Process('rm drush.docset/Contents/Resources/docSet.dsidx');
             $process->run();
-        }
 
-        // executes after the command finishes
-        if (!$process->isSuccessful()) {
-            throw new \RuntimeException($process->getErrorOutput());
+            // executes after the command finishes
+            if (!$process->isSuccessful()) {
+              throw new \RuntimeException($process->getErrorOutput());
+            }
         }
 
         $output->writeln($process->getOutput());
@@ -73,12 +73,14 @@ class Build extends Command
 
         $output->writeln('<info>Deleting old index.htm</info>');
 
-        $process = new Process("rm drush.docset/Contents/Resources/Documents/index.htm");
-        $process->run();
+        if (file_exists("drush.docset/Contents/Resources/Documents/index.htm")) {
+            $process = new Process("rm drush.docset/Contents/Resources/Documents/index.htm");
+            $process->run();
 
-        // executes after the command finishes
-        if (!$process->isSuccessful()) {
-            throw new \RuntimeException($process->getErrorOutput());
+            // executes after the command finishes
+            if (!$process->isSuccessful()) {
+              throw new \RuntimeException($process->getErrorOutput());
+            }
         }
 
         $output->writeln($process->getOutput());
