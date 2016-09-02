@@ -17,14 +17,7 @@ class Build extends Command
     {
         $this
             ->setName('build')
-            ->setDescription('Builds html from commands.json')
-            ->addOption(
-                'funky',
-                null,
-                InputOption::VALUE_NONE,
-                'OH YEAH FUNKAY TIME!'
-            )
-        ;
+            ->setDescription('Builds html from commands.json');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -41,19 +34,14 @@ class Build extends Command
 
         $output->writeln($process->getOutput());
 
-        if ($input->getOption('funky')) {
-            $output->writeln('<error>Removed database</error>');
-        } else {
-            $output->writeln('Removed database');
-        }
+        $output->writeln('<info>Removed database</info>');
+
         $db = new sqlite3("drush.docset/Contents/Resources/docSet.dsidx");
         $db->query("CREATE TABLE searchIndex(id INTEGER PRIMARY KEY, name TEXT, type TEXT, path TEXT)");
         $db->query("CREATE UNIQUE INDEX anchor ON searchIndex (name, type, path)");
-        if ($input->getOption('funky')) {
-            $output->writeln('<info>Created database</info>');
-        } else {
-            $output->writeln('Created database');
-        }
+
+        $output->writeln('<info>Created database</info>');
+
         foreach ($file as $key => $contents) {
             foreach ($contents as $command) {
                 if (is_object($command)) {
@@ -68,11 +56,8 @@ class Build extends Command
                 }
             }
         }
-        if ($input->getOption('funky')) {
-            $output->writeln('<comment>Built html documentation</comment>');
-        } else {
-            $output->writeln('Built html documentation');
-        }
+
+        $output->writeln('<info>Built html documentation</info>');
 
         $process = new Process("tar --exclude='.DS_Store' -cvzf Drush.tgz drush.docset");
         $process->run();
@@ -84,11 +69,7 @@ class Build extends Command
 
         $output->writeln($process->getOutput());
 
-        if ($input->getOption('funky')) {
-            $output->writeln('<info>Deleting old index.htm</info>');
-        } else {
-            $output->writeln('Deleting old index.htm');
-        }
+        $output->writeln('<info>Deleting old index.htm</info>');
 
         $process = new Process("rm drush.docset/Contents/Resources/Documents/index.htm");
         $process->run();
@@ -112,16 +93,8 @@ class Build extends Command
         $file = fopen('drush.docset/Contents/Resources/Documents/index.htm', 'w+');
         fwrite($file, $content);
 
-        if ($input->getOption('funky')) {
-            $output->writeln('<error>Built Drush.tgz</error>');
-        } else {
-            $output->writeln('Built Drush.tgz');
-        }
+        $output->writeln('<info>Built Drush.tgz</info>');
 
-        if ($input->getOption('funky')) {
-            $output->writeln('<info>Complete</info>');
-        } else {
-            $output->writeln('Completrm drush.docset/Contents/Resources/Documents/index.htm');
-        }
+        $output->writeln('<info>Complete</info>');
     }
 }
