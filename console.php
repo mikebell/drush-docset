@@ -7,6 +7,6 @@ use Digital\Console;
 
 $console = new Application();
 $console->add(new Console\Build());
-$console->add(new Console\Generate());
+$console->add(new Console\Download());
 
 $console->run();

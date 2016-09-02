@@ -7,12 +7,12 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Yaml\Parser;
 use Symfony\Component\Process\Process;
 
-class Generate extends Command
+class Download extends Command
 {
     protected function configure()
     {
         $this
-            ->setName('generate')
+            ->setName('download')
             ->setDescription('Generates commands.json from local drush installation')
         ;
     }
