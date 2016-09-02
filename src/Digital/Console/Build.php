@@ -32,9 +32,9 @@ class Build extends Command
             if (!$process->isSuccessful()) {
               throw new \RuntimeException($process->getErrorOutput());
             }
-        }
 
-        $output->writeln($process->getOutput());
+            $output->writeln($process->getOutput());
+        }
 
         $output->writeln('<info>Removed database</info>');
 
@@ -81,9 +81,9 @@ class Build extends Command
             if (!$process->isSuccessful()) {
               throw new \RuntimeException($process->getErrorOutput());
             }
-        }
 
-        $output->writeln($process->getOutput());
+            $output->writeln($process->getOutput());
+        }
 
         Twig_Autoloader::register();
         $content = array();
