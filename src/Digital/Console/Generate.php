@@ -48,8 +48,10 @@ class Generate extends Command
 
         $output->writeln($process->getOutput());
 
-        $process = new Process('rm output/commands.json');
-        $process->run();
+        if (file_exists('output/commands.json')) {
+          $process = new Process('rm output/commands.json');
+          $process->run();
+        }
 
         // executes after the command finishes
         if (!$process->isSuccessful()) {
