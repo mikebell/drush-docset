@@ -25,7 +25,18 @@ class Build extends Command
         $file = json_decode(file_get_contents('output/commands.json'));
 
         if (file_exists("drush.docset/Contents/Resources/docSet.dsidx")) {
-            $process = new Process('rm drush.docset/Contents/Resources/docSet.dsidx');
+          $process = new Process('rm drush.docset/Contents/Resources/docSet.dsidx');
+          $process->run();
+
+          // executes after the command finishes
+          if (!$process->isSuccessful()) {
+            throw new \RuntimeException($process->getErrorOutput());
+          }
+
+        }
+
+        if (file_exists("Drush.tgz")) {
+            $process = new Process('rm Drush.tgz');
             $process->run();
 
             // executes after the command finishes
@@ -33,7 +44,7 @@ class Build extends Command
               throw new \RuntimeException($process->getErrorOutput());
             }
 
-            $output->writeln($process->getOutput());
+            $output->writeln('<info>Removed Drush.tgz</info>');
         }
 
         $output->writeln('<info>Removed database</info>');
@@ -61,16 +72,6 @@ class Build extends Command
 
         $output->writeln('<info>Built html documentation</info>');
 
-        $process = new Process("tar --exclude='.DS_Store' -cvzf Drush.tgz drush.docset");
-        $process->run();
-
-        // executes after the command finishes
-        if (!$process->isSuccessful()) {
-            throw new \RuntimeException($process->getErrorOutput());
-        }
-
-        $output->writeln($process->getOutput());
-
         $output->writeln('<info>Deleting old index.htm</info>');
 
         if (file_exists("drush.docset/Contents/Resources/Documents/index.htm")) {
@@ -81,8 +82,6 @@ class Build extends Command
             if (!$process->isSuccessful()) {
               throw new \RuntimeException($process->getErrorOutput());
             }
-
-            $output->writeln($process->getOutput());
         }
 
         Twig_Autoloader::register();
@@ -96,6 +95,14 @@ class Build extends Command
         $content = $template->render($content);
         $file = fopen('drush.docset/Contents/Resources/Documents/index.htm', 'w+');
         fwrite($file, $content);
+
+        $process = new Process("tar --exclude='.DS_Store' -cvzf Drush.tgz drush.docset");
+        $process->run();
+
+        // executes after the command finishes
+        if (!$process->isSuccessful()) {
+          throw new \RuntimeException($process->getErrorOutput());
+        }
 
         $output->writeln('<info>Built Drush.tgz</info>');
 
