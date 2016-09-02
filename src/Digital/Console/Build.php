@@ -24,8 +24,10 @@ class Build extends Command
     {
         $file = json_decode(file_get_contents('output/commands.json'));
 
-        $process = new Process('rm drush.docset/Contents/Resources/docSet.dsidx');
-        $process->run();
+        if (file(drush.docset/Contents/Resources/docSet.dsidx)) {
+            $process = new Process('rm drush.docset/Contents/Resources/docSet.dsidx');
+            $process->run();
+        }
 
         // executes after the command finishes
         if (!$process->isSuccessful()) {
