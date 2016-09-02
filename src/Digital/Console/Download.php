@@ -33,8 +33,6 @@ class Download extends Command
                 if (!$process->isSuccessful()) {
                     throw new \RuntimeException($process->getErrorOutput());
                 }
-
-                $output->writeln($process->getOutput());
             }
         }
 
@@ -46,8 +44,6 @@ class Download extends Command
             throw new \RuntimeException($process->getErrorOutput());
         }
 
-        $output->writeln($process->getOutput());
-
         if (file_exists('output/commands.json')) {
           $process = new Process('rm output/commands.json');
           $process->run();
@@ -58,8 +54,6 @@ class Download extends Command
             throw new \RuntimeException($process->getErrorOutput());
         }
 
-        $output->writeln($process->getOutput());
-
         $process = new Process('vendor/bin/drush help --format=json > output/commands.json');
         $process->run();
 
@@ -67,8 +61,6 @@ class Download extends Command
         if (!$process->isSuccessful()) {
             throw new \RuntimeException($process->getErrorOutput());
         }
-
-        $output->writeln($process->getOutput());
 
         $output->writeln($text);
     }
