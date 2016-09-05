@@ -28,34 +28,20 @@ class Parse
         $content['description'] = $data->description;
         $content['aliases'] = $data->aliases;
 
-        // Parse arguments so they make sense to twig.
-        $key = 0;
-        foreach ($data->arguments as $option => $text) {
-            // @TODO there are object that need dealing with here.
-            if (!is_object($text) && $text != null) {
-                $content['arguments'][$key]['argument'] = $option;
-                $content['arguments'][$key]['argumenttext'] = $text;
-                $key++;
-            }
-        }
+        $options = array(
+            'arguments' => 'argument',
+            'options' => 'option',
+            'examples' => 'example'
+        );
 
-        $key = 0;
-        foreach ($data->options as $option => $text) {
-            // @TODO there are object that need dealing with here.
-            if (!is_object($text) && $text != null) {
-                $content['options'][$key]['option'] = $option;
-                $content['options'][$key]['optiontext'] = $text;
-                $key++;
-            }
-        }
-
-        $key = 0;
-        foreach ($data->examples as $option => $text) {
-            // @TODO there are object that need dealing with here.
-            if (!is_object($text) && $text != null) {
-                $content['examples'][$key]['example'] = $option;
-                $content['examples'][$key]['exampletext'] = $text;
-                $key++;
+        foreach ($options as $option_plural => $option) {
+            // Parse arguments so they make sense to twig.
+            foreach ($data->$option_plural as $option => $text) {
+                // @TODO there are object that need dealing with here.
+                if (!is_object($text) && $text != null) {
+                    $content[$option_plural][$option] = $option;
+                    $content[$option_plural][$option] = $text;
+                }
             }
         }
 

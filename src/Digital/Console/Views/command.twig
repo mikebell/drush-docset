@@ -22,23 +22,23 @@
             {% endif %}
             {% if arguments %}
                 <h2>Arguments:</h2>
-                {% for argument in arguments %}
-                    <code>{{ argument['argument'] }} : {{ argument['argumenttext'] }}</code><br/>
+                {% for key, argument in arguments %}
+                    <code>{{ key }} : {{ argument }}</code><br/>
                 {% endfor %}
             {% endif %}
 
             {% if options %}
                 <h2>Options:</h2>
-                {% for option in options %}
-                    <code>--{{ option['option'] }} : {{ option['optiontext'] }}</code><br/>
+                {% for key, option in options %}
+                    <code>--{{ key }} : {{ option }}</code><br/>
                 {% endfor %}
             {% endif %}
 
             {% if examples %}
                 <h2>Examples:</h2>
-                {% for example in examples %}
-                    <p>{{ example['exampletext'] }}</p>
-                    <code>{{ example['example'] }}</code><br/><br/>
+                {% for key, example in examples %}
+                    <p>{{ example }}</p>
+                    <code>{{ key }}</code><br/><br/>
                 {% endfor %}
             {% endif %}
         </div>
